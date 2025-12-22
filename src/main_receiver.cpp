@@ -5,7 +5,7 @@
 #include "receiver.h"
 #include <spdlog/spdlog.h>
 
-int main(int argc, char* argv[]) {
+int main(const int argc, char* argv[]) {
     spdlog::info("Receiver started");
 
     if (argc < 3) {
@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    int port = std::stoi(argv[1]);
-    std::string savePath = argv[2];
+    const int port = std::stoi(argv[1]);
+    const std::string savePath = argv[2];
 
     receiveFile(port, savePath);
 

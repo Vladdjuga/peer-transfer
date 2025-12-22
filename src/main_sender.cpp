@@ -5,7 +5,7 @@
 #include "sender.h"
 #include <spdlog/spdlog.h>
 
-int main(int argc, char* argv[]) {
+int main(const int argc, char* argv[]) {
     spdlog::info("Sender started");
 
     if (argc < 4) {
@@ -14,9 +14,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string ip = argv[1];
-    int port = std::stoi(argv[2]);
-    std::string filePath = argv[3];
+    const std::string ip = argv[1];
+    const int port = std::stoi(argv[2]);
+    const std::string filePath = argv[3];
 
     sendFile(ip, port, filePath);
 
