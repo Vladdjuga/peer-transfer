@@ -1,0 +1,72 @@
+# CMake build directories
+cmake-build-*/
+build/
+out/
+
+# CMake cache and files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+compile_commands.json
+
+# Build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.obj
+*.o
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test and temporary files
+Testing/
+test_*.txt
+received*.txt
+*.log
+
+# FetchContent downloaded dependencies
+_deps/
+
+# Windows specific
+Thumbs.db
+desktop.ini
+
+# Compiled binaries
+sender
+receiver
+run_all_tests
+
+# Ninja build files
+.ninja_deps
+.ninja_log
+build.ninja
+rules.ninja
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# Generated files
+*.ddi
+*.ddi.d
+*.ddi.i
+*.modmap
+*.dd
+CXXDependInfo.json
+CXXModules.json
+
