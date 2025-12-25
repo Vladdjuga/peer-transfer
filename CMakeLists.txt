@@ -40,37 +40,26 @@ FetchContent_MakeAvailable(asio)
 
 # Add Asio include directory
 include_directories(${asio_SOURCE_DIR}/asio/include)
+add_compile_definitions(ASIO_STANDALONE)
 
 file(GLOB SOURCES "src/*.cpp")
 
 add_executable(sender src/main_sender.cpp src/sender.cpp src/utils.cpp
-        src/io/file_reader.cpp
-        include/io/file_reader.h
-        src/io/file_writer.cpp)
+        include/peer/Sender.h)
 add_executable(receiver src/main_receiver.cpp src/receiver.cpp src/utils.cpp
-        src/io/file_reader.cpp
-        include/io/file_reader.h
-        include/io/file_writer.h
-        src/io/file_writer.cpp)
+        include/peer/Receiver.h)
 
-# Define ASIO_STANDALONE for standalone Asio (without Boost)
-target_compile_definitions(sender PRIVATE ASIO_STANDALONE)
-target_compile_definitions(receiver PRIVATE ASIO_STANDALONE)
-
-# Link libraries to executables
-target_link_libraries(sender PRIVATE spdlog::spdlog ws2_32)
-target_link_libraries(receiver PRIVATE spdlog::spdlog ws2_32)
+# Link spdlog to both executables
+target_link_libraries(sender PRIVATE spdlog::spdlog ws2_32 mswsock)
+target_link_libraries(receiver PRIVATE spdlog::spdlog ws2_32 mswsock)
 
 # Automatically find all test files
 file(GLOB TEST_SOURCES "tests/*_test.cpp")
 
 # Create test executable with all test files
 add_executable(run_all_tests ${TEST_SOURCES} src/utils.cpp src/sender.cpp src/receiver.cpp
-        src/io/file_reader.cpp
-        include/io/file_reader.h
-        src/io/file_writer.cpp)
-target_compile_definitions(run_all_tests PRIVATE ASIO_STANDALONE)
-target_link_libraries(run_all_tests PRIVATE gtest gtest_main spdlog::spdlog ws2_32)
+        include/peer/Sender.h include/peer/Receiver.h)
+target_link_libraries(run_all_tests PRIVATE gtest gtest_main spdlog::spdlog ws2_32 mswsock)
 target_include_directories(run_all_tests PRIVATE ${gtest_SOURCE_DIR}/include)
 
 # Enable testing
